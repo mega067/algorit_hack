@@ -1,0 +1,18 @@
+<resources>
+ <!-- Agregado: color negro más claro -->
+
+    <style name="Theme.Wifi" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Personaliza los atributos según tus necesidades -->
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:colorBackground">@color/color_black_lighter</item>
+        <!-- Otros atributos -->
+    </style>
+
+    <style name="Theme.Wifi.Dark" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Personaliza los atributos según tus necesidades para el modo oscuro -->
+        <item name="android:windowBackground">#474747</item>
+        <item name="android:colorBackground">@color/color_black_lighter</item> <!-- Agregado: aplicar el color_black_lighter en el modo oscuro -->
+        <!-- Otros atributos para el modo oscuro -->
+    </style>
+</resources>
+

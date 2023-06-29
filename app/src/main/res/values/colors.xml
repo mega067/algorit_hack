@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="color_black_light">#333333</color>
+    <color name="color_black_lighter">#666666</color>
+    <color name="color_gray_dark">#808080</color>
+    <color name="color_gray_light">#9E9E9E</color>
+
+    <color name="background">#FFFFFF</color>
+    <color name="background_dark">#000000</color>
+    <color name="primaryColor">#3F51B5</color>
+    <color name="primaryColorDark">#303F9F</color>
+    <color name="accentColor">#FF4081</color>
+
+    <color name="primaryDarkColorgriss">#9E9E9E</color>
+    <color name="primaryDarkColorDark">#616161</color>
+    <color name="accentColorDark">#FF5722</color>
+
+    <color name="primaryColorRed">#FF0000</color>
+    <color name="primaryDarkColor">#000000</color>
+    <color name="accentColorGreen">#00FF00</color>
+    <color name="purple_start">#9C27B0</color>
+    <color name="purple_end">#673AB7</color>
+    <color name="gradient_purple">#FF9C27B0</color>
+
+    <!-- Colores básicos -->
+    <color name="color_black">#000000</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_red">#FF0000</color>
+    <color name="color_green">#00FF00</color>
+    <color name="color_blue">#0000FF</color>
+    <color name="color_yellow">#FFFF00</color>
+    <color name="color_cyan">#00FFFF</color>
+    <color name="color_magenta">#FF00FF</color>
+
+    <!-- Colores adicionales -->
+    <color name="color_purple">#800080</color>
+    <color name="color_orange">#FFA500</color>
+    <color name="color_gray">#808080</color>
+    <color name="color_brown">#A52A2A</color>
+    <color name="color_pink">#FFC0CB</color>
+
+    <!-- Colores morados y violetas -->
+    <color name="color_purple_dark">#800080</color>
+    <color name="color_purple_light">#C71585</color>
+    <color name="color_violet_dark">#8A2BE2</color>
+    <color name="color_violet_light">#EE82EE</color>
+
+    <!-- Otros colores -->
+</resources>

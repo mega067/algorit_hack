@@ -1,0 +1,12 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/staging' }
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+rootProject.name = "wi-fi"
+include ':app'

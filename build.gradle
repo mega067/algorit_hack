@@ -1,0 +1,26 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/staging' }
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.0.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        //jcenter()
+        maven { url 'https://oss.sonatype.org/content/repositories/staging' }
+        maven { url "https://maven.google.com" } // Agrega este repositorio
+        maven { url 'https://repo.example.com' }
+        maven {url 'https://oss.sonatype.org/content/repositories/ksoap2-android-releases/'}
+
+    }
+}

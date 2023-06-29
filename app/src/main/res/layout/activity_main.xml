@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_marginTop="4dp"
+        android:background="#2196F3"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text=" algorit-hack"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/infoButton"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="74dp"
+            android:layout_height="51dp"
+            android:layout_gravity="center|end"
+            android:backgroundTint="#2821F3"
+            android:scaleType="fitCenter"
+            android:src="@drawable/info" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/wifiButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="139dp"
+        android:layout_height="71dp"
+        android:backgroundTint="#2196F3"
+        android:scaleType="centerCrop"
+        android:scaleX="1"
+
+        android:scaleY="1"
+        android:src="@drawable/start"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="0.358" />
+
+    <Button
+        android:id="@+id/ubeeButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="150dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#2196F3"
+        android:text="Ubee"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/arrisButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wifiButton" />
+
+    <Button
+        android:id="@+id/arrisButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="150dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#2196F3"
+        android:text="Arris"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ubeeButton"
+        app:layout_constraintTop_toBottomOf="@+id/wifiButton" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="374dp"
+        android:layout_height="440dp"
+        android:layout_marginTop="336dp"
+        android:scaleType="centerCrop"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.432"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="0.2"
+        app:srcCompat="@drawable/logo_1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

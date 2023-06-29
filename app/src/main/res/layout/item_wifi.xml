@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.AppCompat.Button.Colored"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:backgroundTint="#259FCF"
+    android:backgroundTintMode="src_atop"
+    android:foregroundTint="#9C27B0"
+    android:orientation="horizontal"
+    android:scrollbarStyle="outsideOverlay"
+    android:stateListAnimator="@android:anim/bounce_interpolator">
+
+    <ImageView
+        android:id="@+id/signalImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_wifi_signal_0" />
+
+    <LinearLayout
+        android:layout_width="361dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/ssidTextView"
+            android:layout_width="291dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/bssidTextView"
+            android:layout_width="289dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="?android:textAppearanceMedium" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/icono"
+        android:layout_width="113dp"
+        android:layout_height="52dp"
+        android:layout_gravity="start"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/si_red" />
+
+
+</LinearLayout>

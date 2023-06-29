@@ -1,0 +1,24 @@
+<resources>
+    <!-- Tema base de la aplicación -->
+    <style name="AppTheme" parent="Theme.Wifi">
+        <!-- Personaliza los atributos según tus necesidades -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryColorDark</item>
+        <item name="colorAccent">@color/accentColor</item>
+        <!-- Otros atributos -->
+
+    </style>
+
+    <style name="AppTheme.Dark" parent="Theme.Wifi.Dark">
+        <!-- Personaliza los atributos según tus necesidades para el modo oscuro -->
+        <item name="colorPrimary">@color/primaryDarkColorgriss</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColorDark</item>
+        <item name="colorAccent">@color/accentColorDark</item>
+
+        <!-- Otros atributos para el modo oscuro -->
+
+    </style>
+
+
+
+</resources>

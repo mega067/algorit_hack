@@ -1,0 +1,120 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="304dp"
+        android:layout_height="41dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:text="conexion a la red WPS :)"
+        android:textColor="#FF0000"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:id="@+id/ssidLayout"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="48dp"
+        android:backgroundTint="#B59C27B0"
+        android:backgroundTintMode="src_atop"
+        android:foregroundTint="#673AB7"
+        android:orientation="horizontal"
+        android:scrollbarStyle="outsideOverlay"
+        android:stateListAnimator="@android:anim/bounce_interpolator">
+
+        <TextView
+            android:id="@+id/ssidTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/passwordLayout"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="385dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ssidLayout"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="48dp"
+        android:backgroundTint="#B59C27B0"
+        android:backgroundTintMode="src_atop"
+        android:foregroundTint="#673AB7"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:scrollbarStyle="outsideOverlay"
+        android:stateListAnimator="@android:anim/bounce_interpolator">
+
+        <EditText
+            android:id="@+id/pinEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Ingrese el PIN"
+            android:inputType="text"
+            android:minHeight="48dp" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/backButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#E91E63"
+        android:scaleType="fitCenter"
+        android:src="@drawable/inicio"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <ImageButton
+        android:id="@+id/connectButton"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="111dp"
+        android:layout_height="43dp"
+        android:layout_below="@+id/passwordLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="150dp"
+        android:backgroundTint="#E91E63"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_connect"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TextView
+        android:id="@+id/alerta"
+        android:layout_width="394dp"
+        android:layout_height="269dp"
+        android:layout_below="@+id/connectButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="10dp"
+        android:foregroundGravity="center"
+        android:lineSpacingExtra="8sp"
+        android:text="Esta app funciona con la generación de contraseñas para los modems Ubee y Arris, recopilando datos como la SSID y el BSSID.\nLa contraseña generada corresponde a la default, así que si se cambia la contraseña o la SSID generaría una contraseña errónea.\n\nNo proponemos que esta herramienta sea usada para un uso en contra de la seguridad y privacidad de terceros. Usa esta app en tus redes o pide permiso para usarla en una red que no sea la tuya. :)"
+        android:textColor="#000000"
+        android:textStyle="bold" />
+
+</RelativeLayout>
