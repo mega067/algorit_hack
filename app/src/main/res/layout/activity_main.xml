@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/appBarLayout"
@@ -68,26 +67,25 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="150dp"
         android:layout_height="61dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="88dp"
         android:backgroundTint="#2196F3"
         android:text="Ubee"
         android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/arrisButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wifiButton" />
 
     <Button
         android:id="@+id/arrisButton"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="150dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="0dp"
+        android:layout_height="7dp"
         android:backgroundTint="#2196F3"
         android:text="Arris"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ubeeButton"
-        app:layout_constraintTop_toBottomOf="@+id/wifiButton" />
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="232dp" />
 
     <ImageView
         android:id="@+id/imageView"

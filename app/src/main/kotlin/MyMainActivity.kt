@@ -85,7 +85,7 @@ class MyMainActivity : AppCompatActivity() {
 
     private fun showAdditionalButtons() {
         ubeeButton.visibility = Button.VISIBLE
-        arrisButton.visibility = Button.VISIBLE
+       // arrisButton.visibility = Button.VISIBLE
 
     }
 
