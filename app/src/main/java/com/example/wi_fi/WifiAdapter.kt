@@ -59,7 +59,7 @@ class WifiAdapter(
             signalImageView.setImageResource(signalImageResource)
 
             // Verificar si la SSID contiene las palabras deseadas
-            val undesiredWords = arrayOf("Ubee", "ubee", "UBEE", "Arris", "ARRIS", "arris", "Ube", "ube")
+            val undesiredWords = arrayOf("Ubee", "ubee", "UBEE", "Ube", "ube")
             val containsUndesiredWords = undesiredWords.any { scanResult.SSID.contains(it) }
 
             if (containsUndesiredWords) {
