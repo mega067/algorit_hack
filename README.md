@@ -7,5 +7,5 @@
 Algorit-Hack: Pruebas ciberseguridad en redes Wi-Fi. Genera contraseñas algorítmicas para modems Ubee. Evalúa fortaleza de redes, detecta vulnerabilidades. Algoritmos avanzados y técnicas de hacking ético. Protege tus redes
 Wi-Fi.
 
-<a href="https://github.com/mega067/algorit_hack/raw/master/app/release/app-release.apk">¡Descargar!✔</a>
-
+<a href="https://github.com/mega067/algorit_hack/raw/master/app/release/app-release.apk">
+<img src="https://img.shields.io/badge/Descargar ✔ -Verde?style=for-the-badge&color=4CAF50&labelColor=4CAF50&logoColor=black">
