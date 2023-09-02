@@ -1,4 +1,4 @@
-package com.example.wi_fi
+package com.example.wi_fi.ui.theme
 
 import WifiAdapter
 import android.Manifest
@@ -14,7 +14,6 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
 import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -22,16 +21,16 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wi_fi.ui.theme.WifiDetailsActivity
+import com.example.wi_fi.R
 
 class UbeeActivity : AppCompatActivity() {
-    private lateinit var wifiManager: WifiManager
-    private lateinit var wifiRecyclerView: RecyclerView
+    protected lateinit var wifiManager: WifiManager
+    protected lateinit var wifiRecyclerView: RecyclerView
 
-    private val wifiScanResults = ArrayList<ScanResult>()
-    private val wifiScanReceiver = WifiScanReceiver()
+    protected val wifiScanResults = ArrayList<ScanResult>()
+    protected val wifiScanReceiver = WifiScanReceiver()
 
-    private val REFRESH_INTERVAL = 30000L // 30 segundos
+    protected val REFRESH_INTERVAL = 30000L // 30 segundos
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +73,7 @@ class UbeeActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun startWifiScan() {
+    protected fun startWifiScan() {
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -92,7 +91,7 @@ class UbeeActivity : AppCompatActivity() {
         }
     }
 
-    private fun showWifiNetworks() {
+    protected fun showWifiNetworks() {
         val wifiAdapter = WifiAdapter(this, wifiScanResults, object : WifiAdapter.OnItemClickListener {
             override fun onItemClick(scanResult: ScanResult) {
                 val selectedSsid = scanResult.SSID
@@ -117,7 +116,7 @@ class UbeeActivity : AppCompatActivity() {
         wifiRecyclerView.adapter = wifiAdapter
     }
 
-    private fun getPassword(ssid: String, bssid: String): String {
+    protected fun getPassword(ssid: String, bssid: String): String {
         // Obtener la primera parte de la contraseña del BSSID
         val bssidDigits = bssid.replace(":", "").substring(2, 8).toUpperCase()
 
@@ -129,7 +128,7 @@ class UbeeActivity : AppCompatActivity() {
     }
 
     @SuppressLint("MissingPermission")
-    private fun connectToWifi(ssid: String, password: String) {
+    protected fun connectToWifi(ssid: String, password: String) {
         val wifiConfig = WifiConfiguration()
         wifiConfig.SSID = "\"$ssid\""
         wifiConfig.preSharedKey = "\"$password\""
@@ -144,7 +143,7 @@ class UbeeActivity : AppCompatActivity() {
         }
     }
 
-    private fun startWifiScanPeriodically() {
+    protected fun startWifiScanPeriodically() {
         startWifiScan()
 
         val handler = Handler()

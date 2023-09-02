@@ -1,19 +1,16 @@
 package com.example.wi_fi.ui.theme
 
 import WifiAdapter
+import com.example.wi_fi.R
+import com.example.wi_fi.ui.theme.WifiDetailsActivity
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.content.pm.PackageManager
 import android.net.wifi.ScanResult
 import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiManager
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
+import android.os.*
 import android.view.View
 import android.widget.ImageButton
 import androidx.annotation.RequiresApi
@@ -23,16 +20,12 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-import com.example.wi_fi.R
-import com.example.wi_fi.ui.theme.WifiDetailsActivity
-
 class ArrisActivity : AppCompatActivity() {
-    private lateinit var wifiManager: WifiManager
-    private lateinit var wifiRecyclerView: RecyclerView
 
-    private val wifiScanResults = ArrayList<ScanResult>()
+    protected lateinit var wifiManager: WifiManager
+    protected lateinit var wifiRecyclerView: RecyclerView
+    protected val wifiScanResults = ArrayList<ScanResult>()
     private val wifiScanReceiver = WifiScanReceiver()
-
     private val REFRESH_INTERVAL = 30000L // 30 segundos
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +69,7 @@ class ArrisActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun startWifiScan() {
+    protected fun startWifiScan() {
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -119,24 +112,21 @@ class ArrisActivity : AppCompatActivity() {
         wifiRecyclerView.adapter = wifiAdapter
     }
 
-
-
-    private fun getPassword(ssid: String, bssid: String): String {
+    protected fun getPassword(ssid: String, bssid: String): String {
         // Obtener la primera parte de la contraseña del BSSID
         val bssidDigits = bssid.replace(":", "").substring(0, 6).toUpperCase()
 
         // Variable decimal que va de "99" a "00"
 
-
         // Obtener la segunda parte de la contraseña del SSID
         val ssidDigits = ssid.replace("-", "").replace(".", "").substring(5, 9).toUpperCase()
 
         // Combinar todas las partes para formar la contraseña
-        return bssidDigits + "??" + ssidDigits
+        return bssidDigits + "???" + ssidDigits
     }
 
     @SuppressLint("MissingPermission")
-    private fun connectToWifi(ssid: String, password: String) {
+    protected fun connectToWifi(ssid: String, password: String) {
         val wifiConfig = WifiConfiguration()
         wifiConfig.SSID = "\"$ssid\""
         wifiConfig.preSharedKey = "\"$password\""

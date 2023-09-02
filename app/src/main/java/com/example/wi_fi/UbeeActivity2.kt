@@ -21,11 +21,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class UbeeActivity2 : AppCompatActivity() {
-    private lateinit var wifiManager: WifiManager
-    private lateinit var wifiRecyclerView: RecyclerView
+    protected lateinit var wifiManager: WifiManager
+    protected lateinit var wifiRecyclerView: RecyclerView
 
-    private val wifiScanResults = ArrayList<ScanResult>()
-    private val wifiScanReceiver = WifiScanReceiver()
+    protected val wifiScanResults = ArrayList<ScanResult>()
+    protected val wifiScanReceiver = WifiScanReceiver()
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +59,7 @@ class UbeeActivity2 : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun startWifiScan() {
+    protected fun startWifiScan() {
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
@@ -77,7 +77,7 @@ class UbeeActivity2 : AppCompatActivity() {
         }
     }
 
-    private fun showWifiNetworks() {
+    protected fun showWifiNetworks() {
         val wifiAdapter = WifiAdapter(this, wifiScanResults, object : WifiAdapter.OnItemClickListener {
             override fun onItemClick(scanResult: ScanResult) {
                 val selectedSsid = scanResult.SSID

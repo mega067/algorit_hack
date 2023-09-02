@@ -20,9 +20,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.wi_fi.R
 
 class WifiDetailsActivity : AppCompatActivity() {
-    private lateinit var ssid: String
-    private lateinit var password: String
-
+    protected lateinit var ssid: String
+    protected lateinit var password: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +74,7 @@ class WifiDetailsActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
-    private fun connectToWifi(ssid: String, password: String) {
+    protected fun connectToWifi(ssid: String, password: String) {
         val specifier = WifiNetworkSpecifier.Builder()
             .setSsid(ssid)
             .setWpa2Passphrase(password)
@@ -106,7 +105,7 @@ class WifiDetailsActivity : AppCompatActivity() {
         connectivityManager.requestNetwork(request, networkCallback)
     }
 
-    private fun connectToWifiLegacy(ssid: String, password: String) {
+    protected fun connectToWifiLegacy(ssid: String, password: String) {
         val wifiManager = applicationContext.getSystemService(Context.WIFI_SERVICE) as android.net.wifi.WifiManager
 
         val wifiConfig = WifiConfiguration()

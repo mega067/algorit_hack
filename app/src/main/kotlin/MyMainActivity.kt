@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wi_fi.ui.theme.ArrisActivity
+import com.example.wi_fi.ui.theme.UbeeActivity
 
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -85,7 +86,7 @@ class MyMainActivity : AppCompatActivity() {
 
     private fun showAdditionalButtons() {
         ubeeButton.visibility = Button.VISIBLE
-       // arrisButton.visibility = Button.VISIBLE
+        arrisButton.visibility = Button.VISIBLE
 
     }
 

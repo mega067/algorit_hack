@@ -67,24 +67,29 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="150dp"
         android:layout_height="61dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="52dp"
         android:backgroundTint="#2196F3"
         android:text="Ubee"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.107"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wifiButton" />
 
     <Button
         android:id="@+id/arrisButton"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="0dp"
-        android:layout_height="7dp"
+        android:layout_width="150dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="52dp"
         android:backgroundTint="#2196F3"
-        android:text="Arris"
+        android:text="Arris(DEPRECATE📴)"
         android:visibility="invisible"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="232dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ubeeButton"
+        app:layout_constraintTop_toBottomOf="@+id/wifiButton" />
 
     <ImageView
         android:id="@+id/imageView"
