@@ -42,11 +42,11 @@ Use this app on your own networks or seek permission to use it on a network that
 
 <div align="center">
   <h1 align="center">UBEE MODEM PASSWORD GENERATION ALGORITHM:</h1>
-</div>
-<p></p>
-<img src="https://raw.githubusercontent.com/mega067/algorit_hack/master/sour_img/default-password.jpg" width="700">
-<img src="https://raw.githubusercontent.com/mega067/algorit_hack/master/sour_img/Screenshot_2023-09-03-11-13-06-868_com.example.wi_fi.jpg" width="300">
 
+<p></p>
+<img src="https://raw.githubusercontent.com/mega067/algorit_hack/master/sour_img/default-password.jpg" width="800">
+<img src="https://raw.githubusercontent.com/mega067/algorit_hack/master/sour_img/Screenshot_2023-09-03-11-13-06-868_com.example.wi_fi.jpg" width="300">
+</div>
 <div align="center">
   <h1 align="center">⚠ Warning ⚠:</h1>
 </div>
