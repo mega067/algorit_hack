@@ -15,13 +15,11 @@ import com.example.wi_fi.ui.theme.UbeeActivity
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-
 class MyMainActivity : AppCompatActivity() {
     private lateinit var wifiButton: ImageButton
     private lateinit var ubeeButton: Button
     private lateinit var arrisButton: Button
     private lateinit var infoButton: ImageButton
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +30,9 @@ class MyMainActivity : AppCompatActivity() {
         arrisButton = findViewById<Button>(R.id.arrisButton)
         infoButton = findViewById<ImageButton>(R.id.infoButton)
 
-
         wifiButton.setOnClickListener {
-            checkRootPermissions()
+            // No es necesario verificar permisos de root
+            showAdditionalButtons()
         }
 
         ubeeButton.setOnClickListener {
@@ -50,74 +48,11 @@ class MyMainActivity : AppCompatActivity() {
         infoButton.setOnClickListener {
             showDialog()
         }
-
-
-    }
-
-    private fun checkRootPermissions() {
-        if (hasRootAccess()) {
-            showAdditionalButtons()
-        } else {
-            showRootPermissionDialog()
-        }
-    }
-
-    private fun hasRootAccess(): Boolean {
-        val process = Runtime.getRuntime().exec("su")
-        val outputStream = process.outputStream
-        outputStream.close()
-
-        val exitCode = process.waitFor()
-        return exitCode == 0
-    }
-
-    private fun showRootPermissionDialog() {
-        val dialogBuilder = AlertDialog.Builder(this)
-        dialogBuilder.setTitle("Solicitud de permisos root")
-            .setMessage("Esta aplicación requiere permisos root. ¿Desea otorgar los permisos?")
-            .setPositiveButton("Sí") { dialog, which ->
-                executeRootCommand()
-            }
-            .setNegativeButton("No") { dialog, which ->
-                Toast.makeText(this, "Permisos root denegados.", Toast.LENGTH_SHORT).show()
-            }
-            .show()
     }
 
     private fun showAdditionalButtons() {
         ubeeButton.visibility = Button.VISIBLE
         arrisButton.visibility = Button.VISIBLE
-
-    }
-
-    private fun executeRootCommand() {
-        val command = "ls /data" // comando root de prurba
-
-        try {
-            val process = Runtime.getRuntime().exec("su")
-            val outputStream = process.outputStream
-            outputStream.write((command + "\n").toByteArray())
-            outputStream.flush()
-            outputStream.close()
-
-            val inputStream = process.inputStream
-            val reader = BufferedReader(InputStreamReader(inputStream))
-            val output = StringBuilder()
-
-            var line: String?
-            while (reader.readLine().also { line = it } != null) {
-                output.append(line).append("\n")
-            }
-
-            process.waitFor()
-
-            val result = output.toString()
-            // Procesar el resultado del comando root aquí
-            Toast.makeText(this, "¡Gracias por darnos permisos root!", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Toast.makeText(this, "Error al ejecutar el comando root.", Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun showDialog() {
@@ -128,7 +63,7 @@ class MyMainActivity : AppCompatActivity() {
                         "\n" +
                         "No nos responsabilizamos por el uso inapropiado de esta herramienta y no tenemos ninguna conexión con las marcas mencionadas anteriormente.\n" +
                         "\n" +
-                        "Esta app requiere que el dispositivo esté rooteado y que la aplicación tenga acceso de superusuario (ROOT).\n" +
+                        "Esta app no requiere permisos de superusuario (ROOT).\n" +
                         "\n" +
                         "Hecho por: Ángel de Jesús Juárez Román\n"
             )
@@ -148,5 +83,4 @@ class MyMainActivity : AppCompatActivity() {
         dialog.setView(dialogView)
         dialog.show()
     }
-
 }
