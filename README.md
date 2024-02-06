@@ -1,5 +1,5 @@
 <div align="center">
-  <h1 align="center">Algorit_Hack (Ubee Tracker ROOT)</h1>
+  <h1 align="center">Algorit_Hack (Ubee Tracker)</h1>
 </div>
 
 <div align="center">
@@ -16,7 +16,8 @@
 </div>
 
 <ul>
-  <li><strong>ROOT:</strong> Algorit_Hack requires ROOT (Super User) access to work since Android protections do not allow a complete network scan.</li>
+  <li><strong>No ROOT Required:</strong> Algorit_Hack no longer requires ROOT (Super User) access to work, thanks to recent updates.</li>
+  <li><strong>Developed by:</strong> Angel de Jesús Juárez Román (Developer), Luis Fernando (Tester)</li>
   <li><strong>SEARCH LIMITATION:</strong> The search limitation is set to every 30 seconds, and this can be disabled from the phone's developer options.</li>
 </ul>
 
@@ -31,7 +32,7 @@
   
 We do not take responsibility for the inappropriate use of this tool, and we have no connection with the mentioned brands.
 
-This application requires your device to be rooted, and the app needs superuser access (ROOT).
+This application no longer requires your device to be rooted, and the app does not need superuser access.
 
 This app works by generating passwords for Ubee and Arris modems, collecting data such as SSID and BSSID.
 The generated password corresponds to the default one, so if you change the password or SSID, it will generate an incorrect password.
