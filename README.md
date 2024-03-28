@@ -60,7 +60,7 @@ Use this app on your own networks or seek permission to use it on a network that
 <div align="center">
   <h1 align="center">DOWNLOAD APK:</h1>
   
-  <a href="https://github.com/mega067/algorit_hack/raw/master/app/release/app-release.apk">
+  <a href="https://github.com/mega067/algorit_hack/raw/e15444764d6ff17b3a619ee3edd87ff10d69567f/app/release/app-release.apk">
     <img src="https://img.shields.io/badge/Download ✔ - Green?style=for-the-badge&color=4CAF50&labelColor=4CAF50&logoColor=black" alt="Download the application">
   </a>
 </div>
